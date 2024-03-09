@@ -17,10 +17,10 @@ public class MovieSeatController {
     private MovieSeatService movieSeatService;
     @PostMapping("/createSeats")
     ResponseEntity<List<MovieSeatInfo>> createSeats(@RequestBody ShowSeatsDTO showSeatsDTO){
-        return ResponseEntity.ok(movieSeatService.createSeats(showSeatsDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieSeatService.createSeats(showSeatsDTO));
     }
 
-    @PostMapping("/changeStatus/{id}")
+    @PostMapping("/changeStatus/{seatId}")
     ResponseEntity<String> changeStatus(@PathVariable String id, @RequestParam boolean available){
        return movieSeatService.changeStatus(id,available) ? ResponseEntity.ok("Success") :
                ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failure");
